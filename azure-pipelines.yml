@@ -29,7 +29,7 @@ jobs:
 
   - task: AndroidSigning@3
     inputs:
-      apksign: false
+      apksign: true
       zipalign: false
       apkFiles: '$(outputDirectory)/*.apk'
 
@@ -39,7 +39,7 @@ jobs:
 
 - job: iOS
   pool:
-    vmImage: 'macOS-10.15'
+    vmImage: 'macOS-12'
 
   steps:
   # To manually select a Xamarin SDK version on the Hosted macOS agent, enable this script with the SDK version you want to target
@@ -59,4 +59,4 @@ jobs:
       solutionFile: '**/*.sln'
       configuration: 'Release'
       buildForSimulator: true
-      packageApp: false
+      packageApp: true
