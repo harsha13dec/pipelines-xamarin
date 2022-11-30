@@ -70,3 +70,5 @@ jobs:
       configuration: 'Release'
       buildForSimulator: true
       packageApp: true
+      runNugetRestore: false
+      
