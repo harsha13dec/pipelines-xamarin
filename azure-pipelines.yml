@@ -71,4 +71,4 @@ jobs:
       buildForSimulator: true
       packageApp: false
       runNugetRestore: false
-      
+      args: "/p:IpaPackageDir="/Users/vsts/agent/2.153.2/work/1/a"
