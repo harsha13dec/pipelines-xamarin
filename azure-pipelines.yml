@@ -30,7 +30,7 @@ jobs:
   - task: AndroidSigning@3
     inputs:
       apksign: true
-      zipalign: false
+      zipalign: true
       apkFiles: '$(outputDirectory)/*.apk'
       keystoreFile: 'mobiledevops.keystore'
       keystoreAlias: 'andriod.apk'
@@ -38,7 +38,7 @@ jobs:
   - task: DownloadSecureFile@1
     name: mobiledevops
     inputs:
-      secureFile: 'mobiledevops.keystore'
+      secureFile: 'mobiledevops'
 
 
   - task: PublishBuildArtifacts@1
