@@ -32,6 +32,13 @@ jobs:
       apksign: true
       zipalign: false
       apkFiles: '$(outputDirectory)/*.apk'
+  
+  - task: DownloadSecureFile@1
+    name: mobiledevops
+    Displayname: 'Download Andriod keystore File'
+    inputs:
+      secureFile: 'mobiledevops.keystore'
+
 
   - task: PublishBuildArtifacts@1
     inputs:
