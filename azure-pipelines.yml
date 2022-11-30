@@ -33,12 +33,12 @@ jobs:
       zipalign: true
       apkFiles: '$(outputDirectory)/*.apk'
       keystoreFile: 'mobiledevops.keystore'
-      keystoreAlias: 'andriod.apk'
+      keystoreAlias: 'andriod'
   
   - task: DownloadSecureFile@1
     name: mobiledevops
     inputs:
-      secureFile: 'mobiledevops'
+      secureFile: 'mobiledevops.keystore'
 
 
   - task: PublishBuildArtifacts@1
