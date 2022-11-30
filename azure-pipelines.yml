@@ -35,7 +35,6 @@ jobs:
   
   - task: DownloadSecureFile@1
     name: mobiledevops
-    Displayname: 'Download Andriod keystore File'
     inputs:
       secureFile: 'mobiledevops.keystore'
 
