@@ -32,7 +32,7 @@ jobs:
       apksign: true
       zipalign: false
       apkFiles: '$(outputDirectory)/*.apk'
-      secureFile: 'mobiledevops.keystore'
+      keystoreFile: 'mobiledevops.keystore'
   
   - task: DownloadSecureFile@1
     name: mobiledevops
