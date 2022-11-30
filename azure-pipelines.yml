@@ -16,9 +16,9 @@ jobs:
   steps:
   - task: NuGetToolInstaller@1
 
-  - task: NuGetCommand@2
-    inputs:
-      restoreSolution: '**/*.sln'
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
 
   - task: XamarinAndroid@1
     inputs:
