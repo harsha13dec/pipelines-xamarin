@@ -48,7 +48,7 @@ jobs:
 
 - job: iOS
   pool:
-    vmImage: 'macOS=11'
+    vmImage: 'macOS-11'
 
   steps:
   # To manually select a Xamarin SDK version on the Hosted macOS agent, enable this script with the SDK version you want to target
