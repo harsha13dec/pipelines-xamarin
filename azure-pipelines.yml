@@ -60,10 +60,8 @@ jobs:
 
   - task: NuGetCommand@2
     inputs:
-      command: 'restore'
       restoreSolution: '**/*.sln'
-      feedsToUse: 'select'
-      vstsFeed: '7e07d8cb-6ca0-40af-ad4e-8c32e80f28e6'
+      
 
   - task: XamariniOS@2
     inputs:
