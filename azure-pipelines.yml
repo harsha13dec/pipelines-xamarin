@@ -55,7 +55,7 @@ jobs:
   # https://go.microsoft.com/fwlink/?linkid=871629
   - script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 6_4_0 
     displayName: 'Select Xamarin SDK version'
-    enabled: true
+    enabled: false
 
   - task: NuGetToolInstaller@1
 
