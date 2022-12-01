@@ -30,6 +30,8 @@ jobs:
 
   - task: AndroidSigning@3
     inputs:
+      apksign: true
+      zipalign: true
       apkFiles: '$(outputDirectory)/*.apk'
       apksignerKeystoreFile: 'mobiledevops.keystore'
       apksignerKeystorePassword: '$(Keystore password)'
