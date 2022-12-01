@@ -45,3 +45,12 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(outputDirectory)'
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'azuredevops-appcenter'
+    appSlug: 'harsha13december-gmail.com/xamarin-android'
+    appFile: '$(System.DefaultWorkingDirectory)/_harsha13dec.pipelines-xamarin (1)/drop/com.companyname.AwesomeApp.apk.unaligned'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'changed'
+    destinationType: 'groups'
+    distributionGroupId: '04869f3a-30ac-4ee9-9f54-0237db2b9d9c'
