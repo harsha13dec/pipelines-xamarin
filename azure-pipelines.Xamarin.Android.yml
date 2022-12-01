@@ -1,35 +1,47 @@
-# Xamarin.Android
-# Build a Xamarin.Android app and Xamarin.UITest assembly.
+# Xamarin.Android and Xamarin.iOS
+# Build a Xamarin.Android and Xamarin.iOS app.
 # Add steps that test, sign, and distribute the app, save build artifacts, and more:
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xamarin
 
-pool:
-  vmImage: 'windows-2019'
+jobs:
 
-variables:
-  buildConfiguration: 'Release'
-  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+- job: Android
+  pool:
+    vmImage: 'windows-2019'
 
-steps:
-- task: NuGetToolInstaller@1
+  variables:
+    buildConfiguration: 'Release'
+    outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*.sln'
+  steps:
+  - task: NuGetToolInstaller@1
 
-- task: XamarinAndroid@1
-  inputs:
-    projectFile: '**/*droid*.csproj'
-    outputDirectory: '$(outputDirectory)'
-    configuration: '$(buildConfiguration)'
-    msbuildVersionOption: '16.0'
 
-- task: AndroidSigning@3
-  inputs:
-    apksign: false
-    zipalign: false
-    apkFiles: '$(outputDirectory)/*.apk'
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(outputDirectory)'
+  - task: XamarinAndroid@1
+    inputs:
+      projectFile: '**/*droid*.csproj'
+      outputDirectory: '$(outputDirectory)'
+      configuration: '$(buildConfiguration)'
+      msbuildVersionOption: '16.0'
+
+  - task: AndroidSigning@3
+    inputs:
+      apkFiles: '$(outputDirectory)/*.apk'
+      apksignerKeystoreFile: 'mobiledevops.keystore'
+      apksignerKeystorePassword: '$(Keystore password)'
+      apksignerKeystoreAlias: '$(Alias)'
+      apksignerKeyPassword: '$(Key password)'
+  
+  - task: DownloadSecureFile@1
+    name: mobiledevops
+    inputs:
+      secureFile: 'mobiledevops.keystore'
+
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(outputDirectory)'
