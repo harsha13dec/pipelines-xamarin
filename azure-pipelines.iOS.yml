@@ -6,7 +6,7 @@ jobs:
   steps:
   # To manually select a Xamarin SDK version on the Hosted macOS agent, enable this script with the SDK version you want to target
   # https://go.microsoft.com/fwlink/?linkid=871629
-  - script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 6_4_0 
+  - script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 6_12_12
     displayName: 'Select Xamarin SDK version'
     enabled: false
 
@@ -14,7 +14,7 @@ jobs:
 
   - task: NuGetCommand@2
     inputs:
-      restoreSolution: '**/*.sln'
+      restoreSolution: '**/*iOS.csproj'
       
 
   - task: XamariniOS@2
