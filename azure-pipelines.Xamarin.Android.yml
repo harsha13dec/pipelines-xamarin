@@ -33,7 +33,7 @@ jobs:
       apksign: true
       zipalign: true
       apkFiles: '$(outputDirectory)/*.apk'
-      apksignerKeystoreFile: '$(keystore-Filename)'
+      apksignerKeystoreFile: 'mobiledevops.keystore'
       apksignerKeystorePassword: '$(Keystore password)'
       apksignerKeystoreAlias: '$(Alias)'
       apksignerKeyPassword: '$(Key password)'
