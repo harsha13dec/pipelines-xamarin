@@ -33,7 +33,7 @@ jobs:
       apksign: true
       zipalign: true
       apkFiles: '$(outputDirectory)/*.apk'
-      apksignerKeystoreFile: '$(Keystore-Filename)'
+      apksignerKeystoreFile: 'mobiledevops.keystore'
       apksignerKeystorePassword: '$(Keystore password)'
       apksignerKeystoreAlias: '$(Alias)'
       apksignerKeyPassword: '$(Key password)'
@@ -41,7 +41,7 @@ jobs:
   - task: DownloadSecureFile@1
     name: mobiledevops
     inputs:
-      secureFile: '$(Keystore-Filename)'
+      secureFile: 'mobiledevops.keystore'
 
 
   - task: PublishBuildArtifacts@1
