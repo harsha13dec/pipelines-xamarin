@@ -31,7 +31,7 @@ steps:
 
 - task: InstallAppleCertificate@2
   inputs:
-    certSecureFile: '$(AppleCertificate-FileName)'
+    certSecureFile: 'Applecert'
     certPwd: '$(AppleCertificate-Password)'
     keychain: 'temp'
 
