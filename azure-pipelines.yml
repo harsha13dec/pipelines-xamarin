@@ -23,10 +23,10 @@ steps:
 
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: 'bbmca_adhoc.mobileprovision'
+    secureFile: 'Applepp'
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: 'DevOPSCertificates(1).p12'
+    secureFile: 'Applecert'
 
 
 - task: InstallAppleCertificate@2
