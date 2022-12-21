@@ -17,7 +17,7 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '**/*ios.cdproj'
+    restoreSolution: '**/*ios.csproj'
 
 - task: XamariniOS@2
   inputs:
