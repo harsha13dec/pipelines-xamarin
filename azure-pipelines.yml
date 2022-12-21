@@ -66,9 +66,9 @@ jobs:
 
   - task: XamariniOS@2
     inputs:
-      solutionFile: '**/*.sln'
+      solutionFile: '**/*ios.csproj
       configuration: 'Release'
-      buildForSimulator: true
-      packageApp: false
+      buildForSimulator: false
+      packageApp: true
       runNugetRestore: false
       args: /p:IpaPackageDir="/Users/vsts/agent/2.153.2/work/1/a"
