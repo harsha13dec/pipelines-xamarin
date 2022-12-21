@@ -26,7 +26,7 @@ steps:
     secureFile: 'bbmca_adhoc.mobileprovision'
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: 'DevOPSCertificates(1)'
+    secureFile: 'DevOPSCertificates(1).p12'
 
 
 - task: InstallAppleCertificate@2
