@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xamarin
 
 pool:
-  vmImage: 'macOS-10.14'
+  vmImage: 'macOS-latest'
 
 steps:
 # To manually select a Xamarin SDK version on the Hosted macOS agent, enable this script with the SDK version you want to target
