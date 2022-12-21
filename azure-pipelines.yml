@@ -5,6 +5,8 @@
 
 pool:
   vmImage: 'macOS-latest'
+variables:
+- group: 'variables'
 
 steps:
 # To manually select a Xamarin SDK version on the Hosted macOS agent, enable this script with the SDK version you want to target
@@ -19,8 +21,19 @@ steps:
   inputs:
     restoreSolution: '**/*ios.csproj'
 
- 
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: '$(ProvisioningProfile-FileName)'
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: '$(AppleCertificate-FileName)'
 
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: '$(AppleCertificate-FileName)'
+    certPwd: '$(AppleCertificate-Password)'
+    keychain: 'temp'
 
 - task: XamariniOS@2
   inputs:
@@ -29,3 +42,6 @@ steps:
     buildForSimulator: false
     packageApp: true
     args: /p:IpaPackageDir="/Users/vsts/agent/2.153.2/work/1/a"
+    signingIdentity: $(APPLE_CERTIFICATE_SIGNING_IDENTITY)
+    signingProvisioningProfileID: $(APPLE_PROV_PROFILE_UUID)
+    
