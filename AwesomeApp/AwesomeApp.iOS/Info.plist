@@ -25,7 +25,7 @@
     <key>CFBundleDisplayName</key>
     <string>AwesomeApp</string>
     <key>CFBundleIdentifier</key>
-    <string>com.companyname.AwesomeApp</string>
+    <string>com.ml.bbmca</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>UILaunchStoryboardName</key>
