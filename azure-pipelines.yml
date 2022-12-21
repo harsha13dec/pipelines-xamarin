@@ -23,10 +23,10 @@ steps:
 
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: '$(ProvisioningProfile-FileName)'
+    secureFile: 'bbmca_adhoc.mobileprovision'
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: '$(AppleCertificate-FileName)'
+    secureFile: 'DevOPSCertificates(1)'
 
 
 - task: InstallAppleCertificate@2
