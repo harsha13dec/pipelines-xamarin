@@ -19,7 +19,7 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '**/*iOS.csproj'
+    restoreSolution: '**/*.sln'
 
 - task: DownloadSecureFile@1
   inputs:
