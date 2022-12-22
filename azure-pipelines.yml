@@ -19,7 +19,7 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '**/*.ios.csproj'
+    restoreSolution: '**/*iOS.csproj'
 
 - task: DownloadSecureFile@1
   inputs:
@@ -41,7 +41,7 @@ steps:
 
 - task: XamariniOS@2
   inputs:
-    solutionFile: '**/*.iOS.csproj'
+    solutionFile: '**/*iOS.csproj'
     configuration: 'Release'
     buildForSimulator: false
     packageApp: true
