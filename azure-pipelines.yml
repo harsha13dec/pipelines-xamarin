@@ -34,6 +34,10 @@ steps:
     certSecureFile: 'Applecert'
     certPwd: '$(AppleCertificate-Password)'
     keychain: 'temp'
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: '$(ProvisioningProfile-FileName)'
 
 - task: XamariniOS@2
   inputs:
