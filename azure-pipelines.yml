@@ -37,7 +37,7 @@ steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    xcWorkspacePath: 
+    xcWorkspacePath: '**/*.iOS.csproj'
     packageApp: true
     signingOption: 'manual'
     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
