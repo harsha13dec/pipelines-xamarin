@@ -43,7 +43,6 @@ steps:
   inputs:
     solutionFile: '**/*.sln'
     configuration: 'Release'
-    clean: true
     packageApp: true
     runNugetRestore: true
     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
