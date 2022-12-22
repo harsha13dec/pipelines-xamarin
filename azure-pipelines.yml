@@ -34,14 +34,7 @@ steps:
     certSecureFile: 'Applecert'
     certPwd: '$(AppleCertificate-Password)'
     keychain: 'temp'
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    xcWorkspacePath: '**/*.iOS.csproj'
-    packageApp: true
-    signingOption: 'manual'
-    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
-    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+
 - task: XamariniOS@2
   inputs:
     solutionFile: '**/*.iOS.csproj'
