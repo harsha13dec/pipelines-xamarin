@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xamarin
 
 trigger:
-- dev
+- patch-1
 jobs:
 
 
