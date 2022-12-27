@@ -1,27 +1,49 @@
-# Xamarin.iOS
-# Build a Xamarin.iOS app and Xamarin.UITest assembly.
-# Add steps that install certificates, test, sign, and distribute the app, save build artifacts, and more:
+# Xamarin.Android and Xamarin.iOS
+# Build a Xamarin.Android and Xamarin.iOS app.
+# Add steps that test, sign, and distribute the app, save build artifacts, and more:
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xamarin
 
-pool:
-  vmImage: 'macOS-latest'
+jobs:
 
-steps:
-# To manually select a Xamarin SDK version on the Hosted macOS agent, enable this script with the SDK version you want to target
-# https://go.microsoft.com/fwlink/?linkid=871629
-- script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_4_1 
-  displayName: 'Select Xamarin SDK version'
-  enabled: false
+- job: Android
+  pool:
+    vmImage: 'windows-2019'
 
-- task: NuGetToolInstaller@1
+  variables:
+    buildConfiguration: 'Release'
+    outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*iOS.csproj'
+  steps:
+  - task: NuGetToolInstaller@1
 
-- task: XamariniOS@2
-  inputs:
-    solutionFile: '**/*iOS.csproj'
-    configuration: 'Release'
-    buildForSimulator: true
-    packageApp: false
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
+
+  - task: XamarinAndroid@1
+    inputs:
+      projectFile: '**/*droid*.csproj'
+      outputDirectory: '$(outputDirectory)'
+      configuration: '$(buildConfiguration)'
+      msbuildVersionOption: '16.0'
+
+  - task: AndroidSigning@3
+    inputs:
+      apksign: true
+      zipalign: true
+      apkFiles: '$(outputDirectory)/*.apk'
+      apksignerKeystoreFile: 'mobiledevops.keystore'
+      apksignerKeystorePassword: '$(Keystore password)'
+      apksignerKeystoreAlias: '$(Alias)'
+      apksignerKeyPassword: '$(Key password)'
+  
+  - task: DownloadSecureFile@1
+    name: mobiledevops
+    inputs:
+      secureFile: 'mobiledevops.keystore'
+
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(outputDirectory)'
