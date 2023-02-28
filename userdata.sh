@@ -1,0 +1,38 @@
+#!/bin/bash
+
+mkdir ./test12
+
+sudo echo "ASPNETCORE_ENVIRONMENT=PreProd" >> /etc/environment 
+
+sudo mkdir /mnt/algappfileshare
+if [ ! -d "/etc/smbcredentials" ]; then
+sudo mkdir /etc/smbcredentials
+fi
+if [ ! -f "/etc/smbcredentials/algbbfileshare.cred" ]; then
+    sudo echo "username=algbbfileshare" >> /etc/smbcredentials/algbbfileshare.cred
+    sudo echo "password=zepVjs5wfBApvL2QN933N8YToJ5wIVSvxWsStPafap7vkg+W1k608OhJZfWpvCNSHQ+W1L2LjY1X+ASt5wQJKg==" >> /etc/smbcredentials/algbbfileshare.cred
+fi
+sudo chmod 600 /etc/smbcredentials/algbbfileshare.cred
+
+sudo echo "//algbbfileshare.file.core.windows.net/algappfileshare /mnt/algappfileshare cifs nofail,credentials=/etc/smbcredentials/algbbfileshare.cred,dir_mode=0777,file_mode=0777,serverino,nosharesock,actimeo=30" >> /etc/fstab
+sudo mount -t cifs //algbbfileshare.file.core.windows.net/algappfileshare /mnt/algappfileshare -o credentials=/etc/smbcredentials/algbbfileshare.cred,dir_mode=0777,file_mode=0777,serverino,nosharesock,actimeo=30
+sudo cat  > /etc/nginx/sites-available/default <<EOL
+server {
+    listen        80;
+    server_name   20.241.250.203*; 
+    location / {
+        proxy_pass         http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection keep-alive;
+        proxy_set_header   Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+}
+EOL
+
+sudo systemctl restart nginx
+
+sudo dotnet /mnt/algappfileshare/adminportal/AdminPortal.BeachBound.UI.dll
